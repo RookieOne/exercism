@@ -58,7 +58,7 @@ begin
       assert_equal 'Sure.', teenager.hey("Wait! Hang on. Are you going to be OK?")
     end
 
-    def test_silence      
+    def test_silence   
       assert_equal 'Fine. Be that way!', teenager.hey('')
     end
 
