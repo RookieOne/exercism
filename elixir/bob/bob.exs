@@ -4,4 +4,8 @@ defmodule Teenager do
     "Whatever."
   end
 
+  def question?(message) do
+    
+  end
+
 end
