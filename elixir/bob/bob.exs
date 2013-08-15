@@ -1,10 +1,17 @@
-defprotocol MessageType do
-  def question?(message)
-  def yelling?(message)
-  def silent?(message)
-end
+defmodule Message do
+  def identify(message) do
+    cond do
+      question?(message) ->
+        {:question}
+      silent?(message) ->
+        {:silent}
+      yelling?(message) ->
+        {:yelling}
+      true ->
+        {:unidentified}
+    end
+  end
 
-defimpl MessageType, for: BitString do
   def question?(message) do
     String.ends_with? message, "?"
   end
@@ -21,25 +28,12 @@ end
 defmodule Teenager do
 
   def hey(message) do
-    respond identify_message(message)
+    respond Message.identify(message)
   end
 
   def respond({:question}), do: "Sure."
   def respond({:silent}), do: "Fine. Be that way!"
   def respond({:yelling}), do: "Woah, chill out!"
   def respond(_), do: "Whatever."
-
-  defp identify_message(message) do
-    cond do
-      MessageType.question?(message) ->
-        {:question}
-      MessageType.silent?(message) ->
-        {:silent}
-      MessageType.yelling?(message) ->
-        {:yelling}
-      true ->
-        {:unidentified}
-    end
-  end
 
 end
